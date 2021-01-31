@@ -117,7 +117,7 @@ bindsym $mod+v splitv
 bindsym $mod+q split toggle
 bindsym $mod+l exec $lock
 bindsym $mod+Escape exec $power
-bindsym $mod+End exec $wifi
+#bindsym $mod+End exec $wifi
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
@@ -139,11 +139,11 @@ bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
 bindsym $mod+Home exec --no-startup-id pkill -USR1 redshift
 
 # Idle configuration
-exec swayidle \
-    timeout 300 'exec $lock' \
-    timeout 600 'swaymsg "output * dpms off"' \
-    after-resume 'swaymsg "output * dpms on"' \
-    before-sleep 'exec $lock'
+#exec swayidle \
+#    timeout 300 'exec $lock' \
+#    timeout 600 'swaymsg "output * dpms off"' \
+#    after-resume 'swaymsg "output * dpms on"' \
+#    before-sleep 'exec $lock'
 
 # Move your focus around
 bindsym $mod+Left focus left
@@ -260,9 +260,9 @@ mode "$mode_system" {
 }
 
 bar {
-    	position bottom
 	swaybar_command waybar
-    
+	gaps 10 10 10 10
+	height 100 
 
 }
 
@@ -271,7 +271,23 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 
 
-#exec_always ~/.config/waybar/waybar.sh
 
 
-include ~/.config/sway/$(hostname)/*
+
+
+exec --no-startup-id pa-applet
+exec --no-startup-id start-pulseaudio-x11
+
+
+#set $lock_bg ~/Pictures/lockscreen.jpg
+
+bindsym $mod+End exec swaylock --indicator --clock --indicator-radius 200 --indicator-thickness 5 --fade-in 1 -c 000000 --text-color ffffff --text-clear-color ffffff --inside-clear-color 11111100 --line-clear-color 00000000
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000 -i $lock_bg' \
+         timeout 600 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000 -i $lock_bg'
+
+
+#include ~/.config/sway/$(hostname)/*

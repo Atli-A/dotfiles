@@ -6,8 +6,8 @@
 }
 
 #waybar {
-  color: @base04;
-  background: @base01;
+  color: #fff;
+  background: #333;
 }
 
 #workspaces {
@@ -25,7 +25,7 @@
 
 #workspaces button.focused {
   border-radius: 4px;
-  background-color: @base02;
+  background-color: #333;
 }
 
 #workspaces button.urgent {
@@ -48,11 +48,14 @@
 }
 
 #mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
-  margin: 4px 2px;
-  padding: 0 6px;
-  background-color: @base02;
+  margin: 8px 2px;
+  padding: 0px 6px;
+  background-color: #555;
+  
   border-radius: 4px;
-  min-width: 20px;
+
+  min-width: 0px;
+  border: 0px solid white;
 }
 
 #pulseaudio.muted {
