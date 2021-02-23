@@ -7,7 +7,7 @@
     "modules-left": ["sway/workspaces", "sway/mode"],
     //"modules-center": ["sway/window"],
 
-    "modules-right": ["tray", "backlight", "custom/storage", "cpu","memory", "temperature", "pulseaudio", "network", "battery", "battery#bat2", "clock"],
+    "modules-right": ["tray", "backlight", "cpu","memory", "temperature", "pulseaudio", "network", "battery", "battery#bat2", "clock"],
     "sway/mode": {
         "format": " {}"
     },
@@ -103,7 +103,7 @@
         "on-click": "alacritty -e nmtui", 
         "tooltip": false
     },
-    "pulseaudio": {
+    /*"pulseaudio": {
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
@@ -118,22 +118,7 @@
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "tooltip": false
-    },
-    "custom/spotify": {
-        "interval": 1,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify",
-        "escape": true
-    },
-    "custom/storage": {
-        "format": "{} ",
-        "format-alt": "{percentage}% ",
-        "format-alt-click": "click-right",
-        "return-type": "json",
-        "interval": 60,
-        "exec": "~/.config/waybar/modules/storage.sh"
-    },
+    }, */
     "backlight": {
         "device": "intel_backlight",
         "format": "{percent}% {icon}",

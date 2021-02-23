@@ -1,14 +1,42 @@
-@import "./base16-waybar/colors/base16-default-dark.css";
+
+/*keyframe */
+
+
+@keyframes battery {
+  0% {background-color: transparent;}
+  50%   {background-color: #d32f2f;}
+  100% {background-color: transparent;}
+
+}
+
+@keyframes bar_fade_in {
+  0%   {
+    color: transparent;
+    background: rgba(0, 0, 0, 0);
+
+  }
+  100% {
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+  }
+}
+
 
 * {
+
   transition: none;
   box-shadow: none;
+ 
 
 }
 
 #waybar {
-  margin: 10px;
+  
+  animation-name: bar_fade_in;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
   color: #fff;
+
   background: rgba(0, 0, 0, 0.75);
 }
 
@@ -36,19 +64,20 @@ window > box {
 }
 */
 
+
+
 #workspaces {
-  margin: 0 4px;
+  margin: 0px ;
   border-radius: 0px;
 }
 
 #workspaces button {
   margin: 0px 0;
   padding: 0 6px;
-  color: #fff;
+  /* color: #fff; */
   border: none;
   border-radius: 0px;
 }
-
 #workspaces button.visible {
 }
 
@@ -75,39 +104,28 @@ window > box {
   border-left: none;
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
+#mode, #battery, #cpu, #memory, #network, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
+  
   margin: 4px 2px;
   padding: 2px 6px;
   /* background-color: #555; */
-  
-  border-radius: 4px;
 
-  min-width: 0px;
+  border-radius: 4px;
+  min-width: 50px;
   border: 0px solid white;
+
 }
 
 #battery.critical:not(.charging) {
-  background-color: #d32f2f;
-  color: #ffffff;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
+  /* background-color: #d32f2f; */
+  /* color: #ffffff; */
+
+
+  animation-delay: 3s;
+  animation-name: battery;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
- }
 
-#pulseaudio.muted {
-  color: #fff;
-}
-
-#pulseaudio.bluetooth {
-  color: #fff;
-}
-
-#clock {
-  margin-left: 12px;
-  margin-right: 4px;
-  background-color: transparent;
 }
 
 #temperature.critical {
