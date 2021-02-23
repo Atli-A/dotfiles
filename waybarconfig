@@ -1,40 +1,42 @@
 {
     "layer": "bottom",
     "position": "bottom",
-    "height": 30,
+    "height": 10,
+    "width": 750,
 
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["tray", "backlight", "custom/storage", "cpu","memory", "temperature", "pulseaudio", "network", "battery", "clock"],
+    //"modules-center": ["sway/window"],
+
+    "modules-right": ["tray", "backlight", "custom/storage", "cpu","memory", "temperature", "pulseaudio", "network", "battery", "battery#bat2", "clock"],
     "sway/mode": {
         "format": " {}"
     },
     "sway/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            /*"1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "6": "華",
-            "10": "ﱘ", */
+            
+	    "1": "",
+	    "2": "",
+	    "3": "",
+            "4": "",
+            "5": "",
+            "6": "",
 
-	    "1": "1",
+	    /* "1": "1",
             "2": "2",
             "3": "3",
             "4": "4",
-            "5": "5",
-            "6": "6",
+            "5": "5", 
+            "6": "6", */
 	    "7": "7",
 	    "8": "8",
 	    "9": "9",
-            "10": "10",
+            "10": "10"
 
 
-            "urgent": "",
+            /*"urgent": "",
             "focused": "",
-            "default": ""
+            "default": "" */
         }
     },
     "sway/window": {
@@ -42,23 +44,36 @@
         "tooltip": false
     },
     "clock": {
-        "format": "{:%a  ·  %d.%m.%Y  ·  %H:%M}",
-        "tooltip": false
+        "format": "{:%a  ·  %m/%d/%Y  ·  %H:%M}",
+        "tooltip": true
     },
     "cpu": {
         "interval": 10,
         "format": "{}% ",
-        "max-length": 10
+        "max-length": 50
     },
     "memory": {
         "interval": 30, 
-        "format": "{used:0.2f} / {total:0.0f} GB ",
+        /* "format": "{used:0.2f} / {total:0.0f} GB ", */
         "format": "{used:0.2f} GB ",
-	"max-length": 10,
+	"max-length": 100,
         "tooltip": false
     },
     "battery": {
         "bat": "BAT0",
+        "format": "{capacity}% {icon}",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""],
+        "format-charging": "{capacity}% ",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
+    },
+    "battery#bat2": {
+        "bat": "BAT1",
         "format": "{capacity}% {icon}",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
@@ -76,7 +91,8 @@
 	"format": "{temperatureC}° "
     },
     "network": {
-        "format": "{icon}",
+        "interval": 10,
+	"format": "{icon}",
         "format-alt": "{ipaddr}/{cidr} {icon}",
         "format-alt-click": "click-right",
         "format-icons": {
@@ -84,7 +100,7 @@
             "ethernet": [""],
             "disconnected": [""]
         },
-        "on-click": "alacritty -e nmtui",
+        "on-click": "alacritty -e nmtui", 
         "tooltip": false
     },
     "pulseaudio": {

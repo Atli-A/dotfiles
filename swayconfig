@@ -1,16 +1,25 @@
 # Variables
-set $mod Mod4
-set $lock ~/.local/bin/scripts/lock.sh
+set $mod Mod1
+set $lock ~/.config/sway/lock.sh
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
-set $term alacritty
+set $term konsole
 
+
+
+set $left j
+set $right semicolon
+set $up k
+set $down l
 #original launcher menu
 #set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 
 
 #bemenu
-set $menu bemenu-run -wi -l 7
+set $menu bemenu-run -ibf -H 33 --nb=#000000 --tb=#000000 --fb=#000000
+#dmenu
+#set $menu dmenu-run
+
 #sway-launcher-dektop set her
 #for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
 #set $menu exec $term --class=launcher -e sway-launcher-desktop
@@ -24,7 +33,6 @@ set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H
 
 #set background
 set $background /home/atli/Pictures/Wallpapers/Black.png
-
 set $cl_high #ffffff
 set $cl_indi #8888ff
 set $cl_back #231f20
@@ -37,9 +45,11 @@ client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
+# 
+# 
 # workspaces
-set $ws1   1:1  #
-set $ws2   2:2  #
+set $ws1   1:1  
+set $ws2   2:2  
 set $ws3   3:3
 set $ws4   4:4
 set $ws5   5:5
@@ -65,21 +75,21 @@ set $wsF12 22:
 font pango:Sans 12
 
 # Window borders
-default_border pixel 2
+default_border pixel 1
 default_floating_border normal
 hide_edge_borders smart
 
-smart_gaps on
-gaps inner 10
+#smart_gaps on
+gaps inner 5
+gaps outer 0
+
 
 # Autostart
-exec --no-startup-id mako
-exec --no-startup-id redshift -c ~/.config/redshift/config
 exec mailspring
 exec spotify
-exec riot
-exec --no-startup-id nextcloud
-exec --no-startup-id libinput-gestures
+exec google-chrome-stable
+exec nextcloud
+exec libinput-gestures
 
 # Input configuration
 #input * {
@@ -94,14 +104,14 @@ exec --no-startup-id libinput-gestures
 output * bg $background fill
 
 # Default workspaces for common programs
-assign [class="^Chromium$"] $ws1
-# assign [class="^code-oss$"] $ws2
-assign [class="^Signal$"] $wsF1
-assign [class="^Riot$"] $wsF1
-assign [class="^Mailspring$"] $wsF2
-assign [app_id="virt-manager"] $wsF8
-assign [class="^KeePass2$"] $wsF11
-assign [class="^Spotify$"] $wsF12
+#assign [class="^Chrome$"] $ws1
+#assign [class="^code-oss$"] $ws2
+#assign [class="^Signal$"] $wsF1
+#assign [class="^Riot$"] $wsF1
+#assign [class="^Mailspring$"] $wsF2
+#assign [app_id="virt-manager"] $wsF8
+#assign [class="^KeePass2$"] $wsF11
+#assign [class="^Spotify$"] $wsF12
 
 # Shortcuts
 bindsym $mod+Return exec $term
@@ -115,7 +125,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+q split toggle
-bindsym $mod+l exec $lock
+#bindsym $mod+l exec $lock
 bindsym $mod+Escape exec $power
 #bindsym $mod+End exec $wifi
 
@@ -124,17 +134,31 @@ bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
 # Multimedia
-bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
-bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+# old volume
+
+#bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+#bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+
+
+#test 
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
+bindsym XF86AudioLowerVolume exec amixer set Master 10%-
+# for debug only
+bindsym XF86AudioMute exec amixer set Master 0%
+#bindsym XF86AudioRaiseVolume exec echo "up" > /tmp/volume.log
+#bindsym XF86AudioLowerVolume exec echo "down" > /tmp/volume.log
+
+
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Brightness controls
-bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
-bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
+#bindsym --locked XF86MonBrightnessUp exec light -A 10
+#bindsym --locked XF86MonBrightnessDown exec light -U 10
 
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 # Toggle Redshift
 bindsym $mod+Home exec --no-startup-id pkill -USR1 redshift
 
@@ -150,12 +174,23 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+#other keys
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # _move_ the focused window with the same, but add Shift
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+#other keys
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # switch to workspace
 bindsym $mod+1   workspace $ws1
@@ -201,9 +236,7 @@ bindsym $mod+Shift+F6   move container to workspace $wsF6
 bindsym $mod+Shift+F7   move container to workspace $wsF7
 bindsym $mod+Shift+F8   move container to workspace $wsF8
 bindsym $mod+Shift+F9   move container to workspace $wsF9
-bindsym $mod+Shift+F10  move container to workspace $wsF10
-bindsym $mod+Shift+F11  move container to workspace $wsF11
-bindsym $mod+Shift+F12  move container to workspace $wsF12
+
 
 # Layout stuff:
 
@@ -261,8 +294,6 @@ mode "$mode_system" {
 
 bar {
 	swaybar_command waybar
-	gaps 10 10 10 10
-	height 100 
 
 }
 
@@ -275,19 +306,26 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 
 
-exec --no-startup-id pa-applet
-exec --no-startup-id start-pulseaudio-x11
 
 
 #set $lock_bg ~/Pictures/lockscreen.jpg
+#
+#
 
-bindsym $mod+End exec swaylock --indicator --clock --indicator-radius 200 --indicator-thickness 5 --fade-in 1 -c 000000 --text-color ffffff --text-clear-color ffffff --inside-clear-color 11111100 --line-clear-color 00000000
 
+bindsym $mod+End exec ~/.config/sway/lock.sh 
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000 -i $lock_bg' \
+         timeout 300 '~/.config/sway/lock.sh' \
          timeout 600 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000 -i $lock_bg'
+         before-sleep '~/.config/sway/lock.sh'
 
+
+
+#wallpaper
+output "*" bg "~/Pictures/Wallpapers/cpu_gold.png" fill
+
+
+bindsym print exec --no-startup-id slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
 #include ~/.config/sway/$(hostname)/*
