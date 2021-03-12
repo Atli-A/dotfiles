@@ -33,9 +33,9 @@ set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H
 
 #set background
 set $background /home/atli/Pictures/Wallpapers/Black.png
-set $cl_high #ffffff
+set $cl_high #222222
 set $cl_indi #8888ff
-set $cl_back #231f20
+set $cl_back #000000
 set $cl_fore #d9d8d8
 set $cl_urge #ee2e24
 
@@ -72,23 +72,20 @@ set $wsF11 21:
 set $wsF12 22:
 
 # Font
-font pango:Sans 12
+font pango:Sans 8 
 
 # Window borders
-default_border pixel 1
+default_border pixel 2
 default_floating_border normal
 hide_edge_borders smart
 
 #smart_gaps on
-gaps inner 5
+gaps inner 0
 gaps outer 0
 
 
 # Autostart
-exec mailspring
-exec spotify
 exec google-chrome-stable
-exec nextcloud
 exec libinput-gestures
 
 # Input configuration
@@ -284,7 +281,7 @@ mode "$mode_system" {
     
 
 
-	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
     bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
 
     # return to default mode
@@ -298,14 +295,6 @@ bar {
 }
 
 bindsym $mod+Shift+e mode "$mode_system"
-
-
-
-
-
-
-
-
 
 
 #set $lock_bg ~/Pictures/lockscreen.jpg
@@ -329,3 +318,8 @@ output "*" bg "~/Pictures/Wallpapers/cpu_gold.png" fill
 bindsym print exec --no-startup-id slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
 #include ~/.config/sway/$(hostname)/*
+#
+#
+default_border normal
+for_window [class="^.*"] border pixel 4
+
