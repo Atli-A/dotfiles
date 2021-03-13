@@ -1,5 +1,9 @@
 #!/bin/bash
 
 
-cp ~/.config/sway .
-cp ~/.config/waybar .
+rm -rf ./sway
+rm -rf ./waybar
+
+
+cp -r ~/.config/sway .
+cp -r ~/.config/waybar .

@@ -1,0 +1,89 @@
+@import "./base16-waybar/colors/base16-default-dark.css";
+
+* {
+  transition: none;
+  box-shadow: none;
+}
+
+#waybar {
+  color: #fff;
+  background: #333;
+}
+
+#workspaces {
+  margin: 0 4px;
+}
+
+
+#workspaces button {
+  margin: 4px 0;
+  padding: 0 6px;
+  color: #fff;
+}
+
+#workspaces button.visible {
+}
+
+#workspaces button.focused {
+  border-radius: 4px;
+  background-color: #555;
+}
+
+#workspaces button.urgent {
+  color: rgba(238, 46, 36, 1);
+}
+
+#tray {
+  margin: 4px 16px 4px 4px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+#tray * {
+  padding: 0 6px;
+  border-left: 1px solid transparent;
+}
+
+#tray *:first-child {
+  border-left: none;
+}
+
+#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
+  margin: 4px 2px;
+  padding: 2px 6px;
+  background-color: #555;
+  
+  border-radius: 4px;
+
+  min-width: 0px;
+  border: 0px solid white;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #d32f2f;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+ }
+
+#pulseaudio.muted {
+  color: #fff;
+}
+
+#pulseaudio.bluetooth {
+  color: #fff;
+}
+
+#clock {
+  margin-left: 12px;
+  margin-right: 4px;
+  background-color: transparent;
+}
+
+#temperature.critical {
+  color: #cc9999;
+}
+

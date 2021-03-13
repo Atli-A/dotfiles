@@ -1,0 +1,133 @@
+
+/*keyframe */
+
+
+@keyframes battery {
+  0% {background-color: transparent;}
+  50%   {background-color: #d32f2f;}
+  100% {background-color: transparent;}
+
+}
+
+@keyframes bar_fade_in {
+  0%   {
+    color: transparent;
+    background: rgba(0, 0, 0, 0);
+
+  }
+  100% {
+    color: white;
+    background: rgba(0, 0, 0, 0.75);
+  }
+}
+
+
+* {
+
+  transition: none;
+  box-shadow: none;
+ 
+
+}
+
+#waybar {
+  
+  animation-name: bar_fade_in;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  color: #fff;
+
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* adds padding around everything */
+
+/*
+#waybar {
+  background: transparent;
+}
+
+window > box {
+  margin: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+  border-bottom: 2px solid rgba(255,255,255, 1);
+  
+  border-radius: 4px;
+  border-bottom-right-radius: 0px;
+  padding: 2px; 
+  border-bottom-left-radius: 0px;
+  color: white;
+
+}
+*/
+
+
+
+#workspaces {
+  margin: 0px ;
+  border-radius: 0px;
+}
+
+#workspaces button {
+  margin: 0px 0;
+  padding: 0 6px;
+  /* color: #fff; */
+  border: none;
+  border-radius: 0px;
+}
+#workspaces button.visible {
+}
+
+#workspaces button.focused {
+  background-color: #555;
+}
+
+#workspaces button.urgent {
+  color: rgba(238, 46, 36, 1);
+}
+
+#tray {
+  margin: 4px 16px 4px 4px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+#tray * {
+  padding: 0 6px;
+  border-left: 1px solid transparent;
+}
+
+#tray *:first-child {
+  border-left: none;
+}
+
+#mode, #battery, #cpu, #memory, #network, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
+  
+  margin: 4px 2px;
+  padding: 2px 6px;
+  /* background-color: #555; */
+
+  border-radius: 4px;
+  border: 0px solid white;
+
+}
+
+#battery.critical:not(.charging) {
+  /* background-color: #d32f2f; */
+  /* color: #ffffff; */
+
+
+  animation-delay: 3s;
+  animation-name: battery;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
+}
+
+#temperature.critical {
+  color: #cc9999;
+}
+
