@@ -101,12 +101,13 @@ exec libinput-gestures
 output * bg $background fill
 
 # Default workspaces for common programs
-#assign [class="^Chrome$"] $ws1
-#assign [class="^code-oss$"] $ws2
-#assign [class="^Signal$"] $wsF1
-#assign [class="^Riot$"] $wsF1
-#assign [class="^Mailspring$"] $wsF2
+assign [class="^code-oss$"] $ws4
+assign [class="^konsole$"] $ws3
+assign [class="^discord$"] $ws5
+assign [class="^code$"] $ws4
+assign [class="^nautilus$"] $ws4
 #assign [app_id="virt-manager"] $wsF8
+#assign [class="^Mailspring$"] $wsF2
 #assign [class="^KeePass2$"] $wsF11
 #assign [class="^Spotify$"] $wsF12
 
@@ -151,6 +152,9 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
+
+#bindsym XF86MonBrightnessUp exec echo "yeet" >> /tmp/skrrt.test
+
 # Toggle Redshift
 bindsym $mod+Home exec pkill -USR1 redshift
 
@@ -283,8 +287,8 @@ mode "$mode_system" {
     
 
 
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+    bindsym Shift+s exec systemctl poweroff -i, mode "default"
+    bindsym Shift+r exec systemctl reboot --firmware-setup, mode "default"
 
     # return to default mode
     bindsym Return mode "default"
