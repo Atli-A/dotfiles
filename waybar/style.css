@@ -9,17 +9,6 @@
 
 }
 
-@keyframes bar_fade_in {
-  0%   {
-    color: transparent;
-    background: rgba(0, 0, 0, 0);
-
-  }
-  100% {
-    color: white;
-    background: rgba(0, 0, 0, 0.75);
-  }
-}
 
 
 * {
@@ -32,12 +21,9 @@
 
 #waybar {
   
-  animation-name: bar_fade_in;
-  animation-duration: 4s;
-  animation-iteration-count: 1;
   color: #fff;
+  background-color: rgba(0, 0, 0, 0.75);
 
-  background: rgba(0, 0, 0, 0.75);
 }
 
 /* adds padding around everything */
@@ -116,13 +102,7 @@ window > box {
 }
 
 #battery.critical:not(.charging) {
-  /* background-color: #d32f2f; */
-  /* color: #ffffff; */
-
-
-  animation-delay: 3s;
-  animation-name: battery;
-  animation-duration: 2s;
+  animation: battery 2s; 
   animation-iteration-count: infinite;
 
 }

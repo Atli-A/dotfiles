@@ -7,10 +7,10 @@ set $term konsole
 
 
 
-set $left j
-set $right semicolon
+set $left h
+set $right l
 set $up k
-set $down l
+set $down j
 #original launcher menu
 #set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
 
@@ -33,14 +33,14 @@ set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H
 
 #set background
 set $background /home/atli/Pictures/Wallpapers/Black.png
-set $cl_high #222222
+set $cl_high #ffffff
 set $cl_indi #8888ff
 set $cl_back #000000
 set $cl_fore #d9d8d8
 set $cl_urge #ee2e24
 
 # Colors                border   bg       text     indicator     childborder
-client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
+client.focused          $cl_high $cl_back $cl_fore $cl_indi $cl_high
 client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
@@ -85,7 +85,7 @@ gaps outer 0
 
 
 # Autostart
-exec google-chrome-stable
+# exec google-chrome-stable
 exec libinput-gestures
 
 # Input configuration
@@ -309,16 +309,10 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 
 bindsym $mod+End exec ~/.config/sway/lock.sh 
-exec swayidle -w \
-         timeout 300 '~/.config/sway/lock.sh' \
-         timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep '~/.config/sway/lock.sh'
-
 
 
 #wallpaper
-output "*" bg "~/Pictures/Wallpapers/cpu_gold.png" fill
+output "*" bg "~/Pictures/Wallpapers/15.jpg" fill
 
 
 bindsym print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
@@ -328,4 +322,8 @@ bindsym print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screensho
 #
 default_border normal
 for_window [class="^.*"] border pixel 4
+for_window [title="kcalc"] floating enable
+
+
+bindsym $mod+tab exec wofi --show run
 
