@@ -311,6 +311,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 bindsym $mod+End exec ~/.config/sway/lock.sh 
 
 
+
 #wallpaper
 output "*" bg "~/Pictures/Wallpapers/15.jpg" fill
 
@@ -320,8 +321,8 @@ bindsym print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screensho
 #include ~/.config/sway/$(hostname)/*
 #
 #
-default_border normal
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 1
+default_border pixel 1 
 for_window [title="kcalc"] floating enable
 
 
