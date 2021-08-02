@@ -92,10 +92,15 @@ unset use_color safe_term match_lhs sh
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias free='free'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 alias ll='ls -alF'
+alias sl='ls'
+alias gti='git'
+alias igt='git'
+alias vim='nvim'
+alias uwufetch='uwufetch -i'
 xhost +local:root > /dev/null 2>&1
 
 complete -cf sudo
@@ -142,3 +147,9 @@ ex ()
 
 #idk what this does 
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+alias archbtw="neofetch"
+alias arch="neofetch"
+alias nyarch="uwufetch - 1"
+alias btw="neofetch"
+

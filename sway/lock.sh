@@ -7,7 +7,7 @@ swaylock \
 	--indicator \
 	--indicator-radius 200 \
 	--indicator-thickness 7 \
-	--effect-blur 7x5 \
+	--effect-blur 10x10 \
 	--effect-vignette 0.5:0.5 \
 	--ring-color 115599 \
 	--ring-ver-color 115599 \

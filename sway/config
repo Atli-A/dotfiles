@@ -1,9 +1,16 @@
+exec killall waybar # kill all waybars from previous session
+
 # Variables
 set $mod Mod1
+set $win Mod4
 set $lock ~/.config/sway/lock.sh
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
 set $term konsole
+# Bar control
+#
+bindsym Mod1+i exec killall waybar
+bindsym Mod1+o exec waybar
 
 
 
@@ -72,7 +79,7 @@ set $wsF11 21:
 set $wsF12 22:
 
 # Font
-font pango:Sans 8 
+font pango: noto Sans 8 
 
 # Window borders
 default_border pixel 2
@@ -80,8 +87,8 @@ default_floating_border normal
 hide_edge_borders smart
 
 #smart_gaps on
-gaps inner 0
-gaps outer 0
+gaps inner 10 
+gaps outer 5
 
 
 # Autostart
@@ -101,10 +108,8 @@ exec libinput-gestures
 output * bg $background fill
 
 # Default workspaces for common programs
-assign [class="^code-oss$"] $ws4
 assign [class="^konsole$"] $ws3
 assign [class="^discord$"] $ws5
-assign [class="^code$"] $ws4
 assign [class="^nautilus$"] $ws4
 #assign [app_id="virt-manager"] $wsF8
 #assign [class="^Mailspring$"] $wsF2
@@ -116,6 +121,8 @@ bindsym $mod+Return exec $term
 bindsym $mod+Print exec $screenshot
 bindsym $mod+Shift+Print exec $screenclip
 bindsym $mod+d exec $menu
+bindsym $mod+c exec google-chrome-stable -enable-features=UseOzonePlatform -ozone-platform=wayland
+ 
 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
@@ -167,8 +174,6 @@ bindsym $mod+Home exec pkill -USR1 redshift
 
 # Move your focus around
 bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 #other keys
 bindsym $mod+$left focus left
@@ -302,15 +307,9 @@ bar {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
-
 #set $lock_bg ~/Pictures/lockscreen.jpg
-#
-#
-
 
 bindsym $mod+End exec ~/.config/sway/lock.sh 
-
-
 
 #wallpaper
 output "*" bg "~/Pictures/Wallpapers/15.jpg" fill
@@ -325,6 +324,11 @@ for_window [class="^.*"] border pixel 1
 default_border pixel 1 
 for_window [title="kcalc"] floating enable
 
+exec tail -f /tmp/wobpipe | wob -a bottom
 
-bindsym $mod+tab exec wofi --show run
 
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+
+bindsym $mod+tab workspace back_and_forth
+bindsym $mod+p exec nwggrid
