@@ -152,4 +152,4 @@ alias archbtw="neofetch"
 alias arch="neofetch"
 alias nyarch="uwufetch - 1"
 alias btw="neofetch"
-
+alias open="xdg-open"

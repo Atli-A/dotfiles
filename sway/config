@@ -1,45 +1,28 @@
-exec killall waybar # kill all waybars from previous session
-
-# Variables
+# Variables 
 set $mod Mod1
 set $win Mod4
 set $lock ~/.config/sway/lock.sh
 set $power ~/.config/rofi/modi/power
 set $wifi ~/.config/rofi/modi/nmcli
-set $term konsole
-# Bar control
-#
-bindsym Mod1+i exec killall waybar
-bindsym Mod1+o exec waybar
-
+set $term kitty
 
 
 set $left h
 set $right l
 set $up k
 set $down j
-#original launcher menu
-#set $menu rofi -m $(expr $(swaymsg -t get_tree | jq '.nodes | map([recurse(.nodes[]?, .floating_nodes[]?) | .focused] | any) | index(true)') - 1) -show drun -run-command 'swaymsg exec -- {cmd}'
-
 
 #bemenu
 set $menu bemenu-run -ibf -H 33 --nb=#000000 --tb=#000000 --fb=#000000
-#dmenu
-#set $menu dmenu-run
-
-#sway-launcher-dektop set her
-#for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 10
-#set $menu exec $term --class=launcher -e sway-launcher-desktop
-
 
 #added space as option to launch
 bindsym $mod+space exec $menu
+
 
 set $screenshot grim ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 #set background
-set $background /home/atli/Pictures/Wallpapers/Black.png
 set $cl_high #ffffff
 set $cl_indi #8888ff
 set $cl_back #000000
@@ -65,19 +48,6 @@ set $ws7   7:7
 set $ws8   8:8
 set $ws9   9:9
 set $ws0   10:10
-set $wsF1  11:
-set $wsF2  12:
-set $wsF3  13:13
-set $wsF4  14:14
-set $wsF5  15:15
-set $wsF6  16:16
-set $wsF7  17:17
-set $wsF8  18:
-set $wsF9  19:19
-set $wsF10 20:20
-set $wsF11 21:
-set $wsF12 22:
-
 # Font
 font pango: noto Sans 8 
 
@@ -87,66 +57,42 @@ default_floating_border normal
 hide_edge_borders smart
 
 #smart_gaps on
-gaps inner 10 
-gaps outer 5
+gaps inner 0
+gaps outer 0
 
 
 # Autostart
-# exec google-chrome-stable
 exec libinput-gestures
-
-# Input configuration
-#input * {
-#    xkb_layout en
-    #xkb_variant nodeadkeys
-    #xkb_options caps:swapescape
-#}
 
 # Output configuration
 
-#set $background #000000
-output * bg $background fill
-
-# Default workspaces for common programs
-assign [class="^konsole$"] $ws3
-assign [class="^discord$"] $ws5
-assign [class="^nautilus$"] $ws4
-#assign [app_id="virt-manager"] $wsF8
-#assign [class="^Mailspring$"] $wsF2
-#assign [class="^KeePass2$"] $wsF11
-#assign [class="^Spotify$"] $wsF12
+set $background #555599
+#set $background /home/atli/Pictures/Wallpapers/Black.png
+output * bg $background solid_color
 
 # Shortcuts
 bindsym $mod+Return exec $term
 bindsym $mod+Print exec $screenshot
 bindsym $mod+Shift+Print exec $screenclip
 bindsym $mod+d exec $menu
-bindsym $mod+c exec google-chrome-stable -enable-features=UseOzonePlatform -ozone-platform=wayland
+bindsym $mod+c exec google-chrome-beta -enable-features=UseOzonePlatform -ozone-platform=wayland
  
 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+c reload
-#bindsym $mod+Shift+e exit
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+q split toggle
-#bindsym $mod+l exec $lock
 bindsym $mod+Escape exec $power
-#bindsym $mod+End exec $wifi
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
 bindsym Control+Shift+Space exec makoctl dismiss --all
 
-# Multimedia
-
-#test 
+#MultiMedia 
 bindsym XF86AudioRaiseVolume exec amixer set Master 10%+
 bindsym XF86AudioLowerVolume exec amixer set Master 10%-
-# for debug only
 bindsym XF86AudioMute exec amixer set Master 0%
-#bindsym XF86AudioRaiseVolume exec echo "up" > /tmp/volume.log
-#bindsym XF86AudioLowerVolume exec echo "down" > /tmp/volume.log
 
 
 bindsym --locked XF86AudioPlay exec playerctl play-pause
@@ -154,23 +100,15 @@ bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
 # Brightness controls
-#bindsym --locked XF86MonBrightnessUp exec light -A 10
-#bindsym --locked XF86MonBrightnessDown exec light -U 10
-
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
-#bindsym XF86MonBrightnessUp exec echo "yeet" >> /tmp/skrrt.test
-
-# Toggle Redshift
-bindsym $mod+Home exec pkill -USR1 redshift
-
 # Idle configuration
-#exec swayidle \
-#    timeout 300 'exec $lock' \
-#    timeout 600 'swaymsg "output * dpms off"' \
-#    after-resume 'swaymsg "output * dpms on"' \
-#    before-sleep 'exec $lock'
+exec swayidle \
+    timeout 1000 'exec $lock' \
+    timeout 1500 'swaymsg "output * dpms off"' \
+    after-resume 'swaymsg "output * dpms on"' \
+    before-sleep 'exec $lock'
 
 # Move your focus around
 bindsym $mod+Left focus left
@@ -239,8 +177,6 @@ bindsym $mod+Shift+F8   move container to workspace $wsF8
 bindsym $mod+Shift+F9   move container to workspace $wsF9
 
 
-# Layout stuff:
-
 # Switch the current container between different layout styles
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
@@ -284,6 +220,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+
 mode "$mode_system" {
     bindsym l exec $lock, mode "default"
     bindsym e exit
@@ -300,35 +237,37 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bar {
-	swaybar_command waybar
-
-}
-
 bindsym $mod+Shift+e mode "$mode_system"
 
-#set $lock_bg ~/Pictures/lockscreen.jpg
-
+#lock screen
 bindsym $mod+End exec ~/.config/sway/lock.sh 
 
 #wallpaper
-output "*" bg "~/Pictures/Wallpapers/15.jpg" fill
+#output "*" bg "~/Pictures/Wallpapers/15.jpg" fill
 
-
+#screenshot
 bindsym print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
 
-#include ~/.config/sway/$(hostname)/*
-#
-#
-for_window [class="^.*"] border pixel 1
-default_border pixel 1 
-for_window [title="kcalc"] floating enable
+default_border pixel 1
 
 exec tail -f /tmp/wobpipe | wob -a bottom
-
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 
-bindsym $mod+tab workspace back_and_forth
-bindsym $mod+p exec nwggrid
+bindsym $mod+tab workspace next
+
+# Input configuration
+input type:keyboard {
+    xkb_layout us,fr
+    xkb_options grp:rctrl_toggle
+
+}
+
+bar {
+	swaybar_command waybar
+}
+
+
+output HDMI1 scale 1
+
