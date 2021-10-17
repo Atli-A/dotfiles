@@ -13,7 +13,7 @@ set $up k
 set $down j
 
 #bemenu
-set $menu bemenu-run -ibf -H 33 --nb=#000000 --tb=#000000 --fb=#000000
+set $menu bemenu-run -ibfw -H 15 --nb=#000000 --tb=#000000 --fb=#000000
 
 #added space as option to launch
 bindsym $mod+space exec $menu
@@ -104,11 +104,11 @@ bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 
 # Idle configuration
-exec swayidle \
-    timeout 1000 'exec $lock' \
-    timeout 1500 'swaymsg "output * dpms off"' \
-    after-resume 'swaymsg "output * dpms on"' \
-    before-sleep 'exec $lock'
+#exec swayidle \
+#    timeout 1000 'exec $lock' \
+#    timeout 1500 'swaymsg "output * dpms off"' \
+#    after-resume 'swaymsg "output * dpms on"' \
+#    before-sleep 'exec $lock'
 
 # Move your focus around
 bindsym $mod+Left focus left
@@ -219,6 +219,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
 set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
 
 mode "$mode_system" {
@@ -226,7 +227,6 @@ mode "$mode_system" {
     bindsym e exit
     bindsym s exec systemctl suspend, mode "default"
     bindsym r exec systemctl reboot, mode "default"
-    
 
 
     bindsym Shift+s exec systemctl poweroff -i, mode "default"
@@ -239,6 +239,17 @@ mode "$mode_system" {
 
 bindsym $mod+Shift+e mode "$mode_system"
 
+
+set $test_system here
+
+mode "$test_system" {
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+t mode "$test_system"
+
+
 #lock screen
 bindsym $mod+End exec ~/.config/sway/lock.sh 
 
@@ -250,7 +261,7 @@ bindsym print exec slurp | grim -g - $(xdg-user-dir PICTURES)/$(date +'screensho
 
 default_border pixel 1
 
-exec tail -f /tmp/wobpipe | wob -a bottom
+#exec tail -f /tmp/wobpipe | wob -a bottom
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -271,3 +282,5 @@ bar {
 
 output HDMI1 scale 1
 
+#gaps outer 10
+#gaps inner 10

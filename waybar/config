@@ -3,12 +3,15 @@
     "position": "bottom",
     "width": 15,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-left": ["sway/workspaces", "sway/test", "sway/mode"],
     //"modules-center": ["sway/window"],
 
     "modules-right": ["tray", "backlight", "cpu","memory", "temperature", "pulseaudio", "network", "battery", "battery#bat2", "clock"],
     "sway/mode": {
         "format": " {}"
+    },
+    "sway/test": {
+    	"format": "{}"
     },
     "sway/workspaces": {
         "format": "{icon}",
@@ -146,6 +149,10 @@
     },
     "tray": {
         "icon-size": 18
+    },
+    "custom/search": {
+	"format": "{test}"
+
     }
 }
 
