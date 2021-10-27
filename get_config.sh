@@ -1,14 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
 
-rm -rf ./sway
-rm -rf ./waybar
+# directories
+cp -r ~/.config/sway ./sway
+cp -r ~/.config/yambar ./yambar
+cp -r ~/.config/foot ./foot
+cp -r ~/.config/nvim ./nvim
 
-
-cp -r ~/.config/sway .
-cp -r ~/.config/waybar .
-
-
-cat ~/.bashrc > .bashrc
-cat ~/.zshrc > .zshrc
-
+# files
+cp .bashrc ./.bashrc
+cp .vimrc ./.vimrc
