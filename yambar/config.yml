@@ -1,0 +1,264 @@
+---
+# ------------------------------------------------
+# [ YAMBAR ]
+# ------------------------------------------------
+
+# ------------------------------------------------
+# [ VARIABLES ]
+# ------------------------------------------------
+# Colors
+base00: &base00 232227ff
+base01: &base01 38383cff
+base02: &base02 4e4e52ff
+base03: &base03 6b5c7cff
+base04: &base04 837593ff
+base05: &base05 9d8fa9ff
+base06: &base06 b7acbfff
+base07: &base07 d2ccd6ff
+
+red: &red         f63d81ff
+pink: &pink       fc65b0ff
+orange: &orange   f5939cff
+yellow: &yellow   e8ec77ff
+green: &green     2dcbb0ff
+blue: &blue       57bbf4ff
+magenta: &magenta a89beeff
+cyan: &cyan       4db9c8ff
+white: &white     ffffffff
+
+# fonts
+nerdfont: &nerdfont Overpass Nerd Font:style=Regular:pixelsize=20
+myfont: &myfont Overpass:style=Regular:pixelsize=20
+sfont: &sfont Overpass:style=Regular:pixelsize=20
+
+# ------------------------------------------------
+# [ BAR ]
+# ------------------------------------------------
+bar:
+    height: 40
+    location: bottom
+    spacing: 5
+
+    # Default
+    font: *myfont
+    foreground: *base07
+    background: 00000066 
+    border:
+        width: 1
+
+    # --------------------------------------------
+    # [ LEFT ]
+    # --------------------------------------------
+    left:
+        - label:
+              content:
+                  - string:
+                        text: +
+                        foreground: *cyan
+                        left-margin: 5
+                        on-click: /usr/bin/bash -c "wlogout"
+
+        - i3:
+            sort: ascending
+
+            content:
+              "":
+                map: 
+                  tag: state
+                  default:   {string: {text: " {name} "}}
+                  values:
+                    focused: {
+                      string: {
+                        text: " {name} ", font: *myfont, deco: {
+                          underline: {
+                            size: 2,
+                            color: ffffffff
+                          }
+                        }
+                      }
+                    }
+    # --------------------------------------------
+    # [ CENTER ]
+    # --------------------------------------------
+    # center:
+
+    # --------------------------------------------
+    # [ RIGHT ]
+    # --------------------------------------------
+    right:
+        - script:
+              path: /home/atli/.config/yambar/modules/cpu.sh
+              args: [1]
+              content:
+                  list:
+                      spacing: 3
+                      items:
+                          - string:
+                              text: 
+                              font: *sfont
+
+                          - string:
+                                text: "{cpu}"
+
+        - alsa:
+              card: hw:PCH
+              mixer: Master
+              content:
+                  map:
+                      tag: muted
+                      values:
+                          true:
+                              list:
+                                  spacing: 3
+                                  items:
+                                      - string:
+                                            text: 
+                                            font: *sfont
+                                            foreground: *pink
+                                      - string:
+                                            text: "{percent}"
+                                            foreground: *pink
+                          false:
+                              list:
+                                  spacing: 3
+                                  items:
+                                      - ramp:
+                                            tag: percent
+                                            items:
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                      - string:
+                                            text: "{percent}"
+                                            font: *myfont
+
+        - battery:
+              name: BAT1
+              poll-interval: 30
+              content:
+                  map:
+                      tag: state
+                      values:
+                          discharging:
+                              list:
+                                  spacing: 3
+                                  items:
+                                      - ramp:
+                                            tag: capacity
+                                            items:
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                      foreground: *pink
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                      foreground: *pink
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                      foreground: *white
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                      foreground: *white
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                - string:
+                                                      text: 
+                                                      font: *sfont
+                                                      foreground: *green
+                                      - string:
+                                            text: "{capacity}%"
+                                            font: *myfont
+                          charging:
+                              list:
+                                  spacing: 3
+                                  items:
+                                      - string:
+                                            text: 
+                                            foreground: *cyan
+                                            font: *sfont
+                                      - string:
+                                            text: "{capacity}%"
+                                            font: *myfont
+                          full:
+                              list:
+                                  spacing: 3
+                                  items:
+                                      - string:
+                                            text: 
+                                            foreground: *green
+                                            font: *sfont
+                                      - string:
+                                            text: "{capacity}%"
+                                            font: *myfont
+
+        - network:
+              name: wlan0
+              content:
+                  map:
+                      tag: state
+                      default:
+                          string:
+                              text: 直
+                              font: *sfont
+                      values:
+                          down:
+                              string:
+                                  text: 睊
+                                  font: *sfont
+                          up:
+                              map:
+                                  tag: ipv4
+                                  default:
+                                      string:
+                                          text: 直
+                                          font: *sfont
+                                  values:
+                                      "":
+                                          string:
+                                              text: 直
+                                              font: *sfont
+
+        - clock:
+              time-format: "%H:%M"
+              date-format: "%a %d/%m/%y"
+              content:
+                  list:
+                      spacing: 5
+                      right-margin: 5
+                      items:
+                          - string:
+                                text: "{date}"
+                                font: *sfont
+                          - string:
+                                text: " {time} "
+                                foreground: *magenta
+                                deco:
+                                    { underline: { size: 2, color: *magenta } }
