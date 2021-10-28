@@ -1,12 +1,21 @@
 #!/bin/sh
 
+refill_dir() {
+	if [ $1 ]; then
+		base=./$(basename $1)
+		if [ -d $base ]; then
+			rm -r $base 
+		fi
+		cp -r $1 .
+	fi
+};
 
 # directories
-cp -r ~/.config/sway ./sway
-cp -r ~/.config/yambar ./yambar
-cp -r ~/.config/foot ./foot
-cp -r ~/.config/nvim ./nvim
+refill_dir $(eval echo /home/$USER"/.config/sway")
+refill_dir $(eval echo /home/$USER"/.config/nvim")
+refill_dir $(eval echo /home/$USER"/.config/foot")
+refill_dir $(eval echo /home/$USER"/.config/yambar")
 
 # files
-cp .bashrc ./.bashrc
-cp .vimrc ./.vimrc
+cp ~/.bashrc ./.bashrc
+cp ~/.vimrc ./.vimrc
