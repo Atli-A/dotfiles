@@ -77,10 +77,17 @@ bar:
                         }
                       }
                     }
+
+        - script:
+            path: /home/atli/.config/yambar/modules/swaymode.sh
+            args: [ 0.1 ]
+            content: { string: {text: "  > {swaymode}"}}
     # --------------------------------------------
     # [ CENTER ]
     # --------------------------------------------
     # center:
+
+
 
     # --------------------------------------------
     # [ RIGHT ]
