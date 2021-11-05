@@ -11,10 +11,10 @@ refill_dir() {
 };
 
 # directories
-refill_dir $(eval echo /home/$USER"/.config/sway")
-refill_dir $(eval echo /home/$USER"/.config/nvim")
-refill_dir $(eval echo /home/$USER"/.config/foot")
-refill_dir $(eval echo /home/$USER"/.config/yambar")
+refill_dir $(eval echo $HOME"/.config/sway")
+refill_dir $(eval echo $HOME"/.config/nvim")
+refill_dir $(eval echo $HOME"/.config/foot")
+refill_dir $(eval echo $HOME"/.config/yambar")
 
 # files
 cp ~/.bashrc ./.bashrc
