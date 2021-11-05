@@ -35,8 +35,6 @@ client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
 client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
 
-# 
-# 
 # workspaces
 set $ws1   1
 set $ws2   2
@@ -62,9 +60,8 @@ gaps outer 0
 
 
 # Autostart
-
-# idk why it wont work otherwise
-exec_always  killall yambar ; yambar
+exec_always killall yambar
+exec_always yambar --backend=wayland 
 
 # Output configuration
 
@@ -239,8 +236,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-#bindsym $mod+Shift+e mode "$mode_system"
-bindsym $mod+Shift+e exec wlogout
+bindsym $mod+Shift+e mode "$mode_system"
 
 
 set $test_system here
@@ -274,7 +270,7 @@ bindsym $mod+tab workspace next
 # Input configuration
 input type:keyboard {
     xkb_layout us,fr
-    xkb_options grp:rctrl_toggle
+    xkb_options grp:win_space_toggle
 
 }
 
@@ -288,3 +284,5 @@ gaps inner 5
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
+
+output $laptop scale 2
