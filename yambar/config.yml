@@ -36,16 +36,15 @@ sfont: &sfont Overpass:style=Regular:pixelsize=20
 # ------------------------------------------------
 bar:
     height: 40
-    location: bottom
-    spacing: 5
+    location: top
+    spacing: 10
 
     # Default
     font: *myfont
     foreground: *base07
-    background: 00000066 
+    background: 000000aa
     border:
-        width: 1
-
+        width: 0
     # --------------------------------------------
     # [ LEFT ]
     # --------------------------------------------
@@ -54,9 +53,9 @@ bar:
               content:
                   - string:
                         text: +
-                        foreground: *cyan
-                        left-margin: 5
+                        margin: 15
                         on-click: /usr/bin/bash -c "wlogout"
+                                
 
         - i3:
             sort: ascending
@@ -81,7 +80,11 @@ bar:
         - script:
             path: /home/atli/.config/yambar/modules/swaymode.sh
             args: [ 0.1 ]
-            content: { string: {text: "  > {swaymode}"}}
+            content: 
+              - string: 
+                  text: "> {swaymode}"
+                  font: *myfont
+                  left-margin: 10
     # --------------------------------------------
     # [ CENTER ]
     # --------------------------------------------
@@ -93,6 +96,11 @@ bar:
     # [ RIGHT ]
     # --------------------------------------------
     right:
+        - backlight:
+              name: intel_backlight
+              content:
+                - string:
+                    text: "{percent}%"
         - script:
               path: /home/atli/.config/yambar/modules/cpu.sh
               args: [1]
@@ -150,7 +158,6 @@ bar:
                                       - string:
                                             text: "{percent}"
                                             font: *myfont
-
         - battery:
               name: BAT1
               poll-interval: 30
