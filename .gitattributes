@@ -3,3 +3,5 @@
 
 *.ini linguist-detectable=true
 *.ini linguist-language=INI
+
+sway/config linguist-detectable=true
