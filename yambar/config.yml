@@ -27,15 +27,15 @@ cyan: &cyan       4db9c8ff
 white: &white     ffffffff
 
 # fonts
-nerdfont: &nerdfont Overpass Nerd Font:style=Regular:pixelsize=20
-myfont: &myfont Overpass:style=Regular:pixelsize=20
-sfont: &sfont Overpass:style=Regular:pixelsize=20
+nerdfont: &nerdfont Overpass Nerd Font:style=Regular:pixelsize=25
+myfont: &myfont Overpass:style=Regular:pixelsize=25
+sfont: &sfont Overpass:style=Regular:pixelsize=25
 
 # ------------------------------------------------
 # [ BAR ]
 # ------------------------------------------------
 bar:
-    height: 40
+    height: 60
     location: top
     spacing: 10
 
@@ -54,7 +54,7 @@ bar:
                   - string:
                         text: +
                         margin: 15
-                        on-click: /usr/bin/bash -c "wlogout"
+                        on-click: swaymsg mode "$mode_system"
                                 
 
         - i3:
@@ -266,7 +266,6 @@ bar:
               content:
                   list:
                       spacing: 5
-                      right-margin: 5
                       items:
                           - string:
                                 text: "{date}"
