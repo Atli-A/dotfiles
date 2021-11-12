@@ -13,14 +13,9 @@ set $down j
 #bemenu
 set $menu bemenu-run -ibfw -H 15 --nb=#000000 --tb=#000000 --fb=#000000
 
-#added space as option to launch
-bindsym $mod+space exec $menu
-
-
 set $screenshot grim ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 set $screenclip slurp | grim -g - ~/Images/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
-#set background
 set $cl_high #ffffff
 set $cl_indi #8888ff
 set $cl_back #000000
@@ -80,7 +75,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+b splith
 bindsym $mod+v splitv
 bindsym $mod+q split toggle
-bindsym $mod+Escape exec $power
 
 # Notifications
 bindsym Control+Space exec makoctl dismiss
@@ -163,7 +157,7 @@ bindsym $mod+f fullscreen
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
 # Swap focus between the tiling area and the floating area
-#bindsym $mod+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # move focus to the parent container
 bindsym $mod+a focus parent
@@ -226,8 +220,6 @@ bindsym print exec slurp | grim -g - ~/Pictures/$(date +'screenshot_%Y-%m-%d-%H%
 
 default_border pixel 1
 
-#exec tail -f /tmp/wobpipe | wob -a bottom
-
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 
@@ -237,13 +229,17 @@ bindsym $mod+tab workspace next
 input type:keyboard {
     xkb_layout us,fr
     xkb_options grp:win_space_toggle
-
 }
 
-exec wmname LG3D
+input type:touchpad {
+    accel_profile adaptive 
+    pointer_accel 0
+}
+
 
 set $laptop eDP-1
-bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:on exec systemctl suspend
+#bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
-output $laptop scale 2
+output $laptop scale 1.6
